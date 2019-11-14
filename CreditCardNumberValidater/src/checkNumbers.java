@@ -1,46 +1,80 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class checkNumbers
 	{
-		public static int[] creditCardNumbers = new int[16];
-		static long validCard = (long) 5424180123456789.;
-		static long invalidCard = (long) 5424180123456787.;
+	public static int counter = 0;
+	
+	public static void main(String[] args)
+	{
+		inputNumbers.greeting();
 		
-		public static void callMethod()
+		checkNumbers.readLines("McGurieNumbers");
+		System.out.println(counter);
+
+	}
+	
+		
+		public static void readLines(String fileName)
 		{
-	
-			doubleDigits();
-			addTwoDigits();
-			replaceDigits();
-			divisibleTen();
-	
+		String line = null;
+
+		try
+		{
+		FileReader fileReader = new FileReader(fileName);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+		while ((line = bufferedReader.readLine()) != null)
+		{
+
+		// method (line);
+			manipulateNumbers(line);
+		}
+		bufferedReader.close();
+		} catch (FileNotFoundException ex)
+		{
+		System.out.println("Unable to open file '" + fileName + "'");
+		} catch (IOException ex)
+		{
+		System.out.println("Error reading file '" + fileName + "'");
+		}
+
 		}
 		
-		
-		public static void doubleDigits()
+		// Check if numbers are valid here:
+		public static void manipulateNumbers(String line)
 		{
-		//Step 1: double alternating digits starting with the first digit
-			for (int i = 0; i <= 16; i++)
+			int sum = 0;
+			for (int i = 0; i < 16; i++)
+			{
+				int digit = 0;
+				if (i%2 == 0)
 				{
-					creditCardNumbers[i] = (int) ((int) (validCard%10) + (validCard/10));
-					
+					digit = 2*(Integer.parseInt(line.substring(i, i+1)));
 				}
-		
-		}
-		
-		public static void addTwoDigits()
-		{
-			//Step 2: if doubling resulted in number with with digits, add them together to get single digit number
+				
+				int sumDigit = 0;
+				if (digit >= 10)
+				{
+					int lastDigit = 0;
+					lastDigit = digit%10;
+					sumDigit = 1 + lastDigit;
+					digit = sumDigit;
+				}
+				
+				sum += digit;
+				
+			}
 			
+			if (sum%10 == 0)
+			{
+				counter++;
+			}
+				
 		}
-		
-		public static void replaceDigits()
-		{
-			//Step 3: replace digits that manipulated, then add them all up
-		}
-		
-		public static void divisibleTen()
-		{
-			// Step 4: check to see if divisible by 10
-		}
+
+
 
 	}
