@@ -58,6 +58,7 @@ public class checkNumbers
 				
 				if (i%2 == 0)
 				{
+					//Doing (i, i+2) fixed the code to 29
 					digit = 2*(Integer.parseInt(line.substring(i, i+2)));
 				}
 				
