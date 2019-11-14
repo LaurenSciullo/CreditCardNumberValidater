@@ -11,7 +11,8 @@ public class checkNumbers
 	{
 		inputNumbers.greeting();
 		
-		checkNumbers.readLines("McGurieNumbers");
+		checkNumbers.readLines("McGuireNumbers");
+		
 		System.out.println(counter);
 
 	}
@@ -30,7 +31,7 @@ public class checkNumbers
 		{
 
 		// method (line);
-			manipulateNumbers(line);
+		manipulateNumbers(line);
 		}
 		bufferedReader.close();
 		} catch (FileNotFoundException ex)
@@ -46,23 +47,31 @@ public class checkNumbers
 		// Check if numbers are valid here:
 		public static void manipulateNumbers(String line)
 		{
+			
+			int digit = 0;
 			int sum = 0;
-			for (int i = 0; i < 16; i++)
+			int lastDigit = 0;
+			int sumDigit = 0;
+			
+			for (int i = 0; i < line.length(); i++)
 			{
-				int digit = 0;
+				
 				if (i%2 == 0)
 				{
-					digit = 2*(Integer.parseInt(line.substring(i, i+1)));
+					digit = 2*(Integer.parseInt(line.substring(i, i+2)));
 				}
 				
-				int sumDigit = 0;
+				
+				
 				if (digit >= 10)
 				{
-					int lastDigit = 0;
+					
 					lastDigit = digit%10;
-					sumDigit = 1 + lastDigit;
+					sumDigit += lastDigit;
 					digit = sumDigit;
+					
 				}
+				
 				
 				sum += digit;
 				
@@ -72,7 +81,7 @@ public class checkNumbers
 			{
 				counter++;
 			}
-				
+			
 		}
 
 
